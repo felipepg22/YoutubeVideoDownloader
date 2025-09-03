@@ -28,12 +28,59 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            txtYoutubeUrl = new TextBox();
+            btnDownload = new Button();
+            lblYoutubeUrl = new Label();
+            SuspendLayout();
+            // 
+            // txtYoutubeUrl
+            // 
+            txtYoutubeUrl.Location = new Point(17, 53);
+            txtYoutubeUrl.Margin = new Padding(4, 5, 4, 5);
+            txtYoutubeUrl.Name = "txtYoutubeUrl";
+            txtYoutubeUrl.Size = new Size(940, 31);
+            txtYoutubeUrl.TabIndex = 0;
+            // 
+            // btnDownload
+            // 
+            btnDownload.Location = new Point(398, 117);
+            btnDownload.Margin = new Padding(4, 5, 4, 5);
+            btnDownload.Name = "btnDownload";
+            btnDownload.Size = new Size(159, 42);
+            btnDownload.TabIndex = 1;
+            btnDownload.Text = "Download";
+            btnDownload.UseVisualStyleBackColor = true;
+            btnDownload.Click += btnDownload_Click;
+            // 
+            // lblYoutubeUrl
+            // 
+            lblYoutubeUrl.AutoSize = true;
+            lblYoutubeUrl.Location = new Point(17, 23);
+            lblYoutubeUrl.Margin = new Padding(4, 0, 4, 0);
+            lblYoutubeUrl.Name = "lblYoutubeUrl";
+            lblYoutubeUrl.Size = new Size(162, 25);
+            lblYoutubeUrl.TabIndex = 2;
+            lblYoutubeUrl.Text = "Youtube video URL";
+            // 
+            // YoutubeDownloaderForm
+            // 
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1143, 750);
+            Controls.Add(lblYoutubeUrl);
+            Controls.Add(btnDownload);
+            Controls.Add(txtYoutubeUrl);
+            Margin = new Padding(4, 5, 4, 5);
+            Name = "YoutubeDownloaderForm";
+            Text = "Youtube Video Downloader";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private TextBox txtYoutubeUrl;
+        private Button btnDownload;
+        private Label lblYoutubeUrl;
     }
 }

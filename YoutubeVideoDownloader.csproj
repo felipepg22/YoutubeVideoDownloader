@@ -8,4 +8,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="NReco.VideoConverter" Version="1.2.1" />
+    <PackageReference Include="YoutubeExplode.Converter" Version="6.5.4" />
+  </ItemGroup>
+
 </Project>
