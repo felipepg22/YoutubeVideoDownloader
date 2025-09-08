@@ -31,6 +31,8 @@
             txtYoutubeUrl = new TextBox();
             btnDownload = new Button();
             lblYoutubeUrl = new Label();
+            txtFolderPath = new TextBox();
+            lblFolderPath = new Label();
             SuspendLayout();
             // 
             // txtYoutubeUrl
@@ -62,11 +64,29 @@
             lblYoutubeUrl.TabIndex = 2;
             lblYoutubeUrl.Text = "Youtube video URL";
             // 
+            // txtFolderPath
+            // 
+            txtFolderPath.Location = new Point(17, 58);
+            txtFolderPath.Name = "txtFolderPath";
+            txtFolderPath.Size = new Size(378, 31);
+            txtFolderPath.TabIndex = 3;
+            // 
+            // lblFolderPath
+            // 
+            lblFolderPath.AutoSize = true;
+            lblFolderPath.Location = new Point(13, 30);
+            lblFolderPath.Name = "lblFolderPath";
+            lblFolderPath.Size = new Size(124, 25);
+            lblFolderPath.TabIndex = 4;
+            lblFolderPath.Text = "Folder to save";
+            // 
             // YoutubeDownloaderForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(486, 242);
+            Controls.Add(lblFolderPath);
+            Controls.Add(txtFolderPath);
             Controls.Add(lblYoutubeUrl);
             Controls.Add(btnDownload);
             Controls.Add(txtYoutubeUrl);
@@ -82,5 +102,7 @@
         private TextBox txtYoutubeUrl;
         private Button btnDownload;
         private Label lblYoutubeUrl;
+        private TextBox txtFolderPath;
+        private Label lblFolderPath;
     }
 }
