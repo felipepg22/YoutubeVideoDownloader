@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(YoutubeDownloaderForm));
             txtYoutubeUrl = new TextBox();
             btnDownload = new Button();
             lblYoutubeUrl = new Label();
             txtFolderPath = new TextBox();
             lblFolderPath = new Label();
+            btnChooseFolder = new Button();
             SuspendLayout();
             // 
             // txtYoutubeUrl
@@ -80,11 +82,22 @@
             lblFolderPath.TabIndex = 4;
             lblFolderPath.Text = "Folder to save";
             // 
+            // btnChooseFolder
+            // 
+            btnChooseFolder.BackgroundImage = (Image)resources.GetObject("btnChooseFolder.BackgroundImage");
+            btnChooseFolder.BackgroundImageLayout = ImageLayout.Zoom;
+            btnChooseFolder.Location = new Point(401, 58);
+            btnChooseFolder.Name = "btnChooseFolder";
+            btnChooseFolder.Size = new Size(57, 34);
+            btnChooseFolder.TabIndex = 5;
+            btnChooseFolder.UseVisualStyleBackColor = true;
+            // 
             // YoutubeDownloaderForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(486, 242);
+            Controls.Add(btnChooseFolder);
             Controls.Add(lblFolderPath);
             Controls.Add(txtFolderPath);
             Controls.Add(lblYoutubeUrl);
@@ -104,5 +117,6 @@
         private Label lblYoutubeUrl;
         private TextBox txtFolderPath;
         private Label lblFolderPath;
+        private Button btnChooseFolder;
     }
 }
