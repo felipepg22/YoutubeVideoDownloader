@@ -35,15 +35,15 @@
             // 
             // txtYoutubeUrl
             // 
-            txtYoutubeUrl.Location = new Point(17, 53);
+            txtYoutubeUrl.Location = new Point(13, 127);
             txtYoutubeUrl.Margin = new Padding(4, 5, 4, 5);
             txtYoutubeUrl.Name = "txtYoutubeUrl";
-            txtYoutubeUrl.Size = new Size(940, 31);
+            txtYoutubeUrl.Size = new Size(431, 31);
             txtYoutubeUrl.TabIndex = 0;
             // 
             // btnDownload
             // 
-            btnDownload.Location = new Point(398, 117);
+            btnDownload.Location = new Point(151, 168);
             btnDownload.Margin = new Padding(4, 5, 4, 5);
             btnDownload.Name = "btnDownload";
             btnDownload.Size = new Size(159, 42);
@@ -55,7 +55,7 @@
             // lblYoutubeUrl
             // 
             lblYoutubeUrl.AutoSize = true;
-            lblYoutubeUrl.Location = new Point(17, 23);
+            lblYoutubeUrl.Location = new Point(13, 97);
             lblYoutubeUrl.Margin = new Padding(4, 0, 4, 0);
             lblYoutubeUrl.Name = "lblYoutubeUrl";
             lblYoutubeUrl.Size = new Size(162, 25);
@@ -66,7 +66,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1143, 750);
+            ClientSize = new Size(486, 242);
             Controls.Add(lblYoutubeUrl);
             Controls.Add(btnDownload);
             Controls.Add(txtYoutubeUrl);
