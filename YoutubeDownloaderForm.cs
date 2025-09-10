@@ -13,7 +13,7 @@ namespace YoutubeVideoDownloader
         private async void btnDownload_Click(object sender, EventArgs e)
         {
             btnDownload.Enabled = false;
-            string filePathToSaveVideo = "C:\\Videos";
+            string filePathToSaveVideo = txtFolderPath.Text.Trim();
 
             string urlFromVideo = txtYoutubeUrl.Text;
 
@@ -76,7 +76,19 @@ namespace YoutubeVideoDownloader
                 btnDownload.Enabled = true;
             }
 
-            
+
+        }
+
+        private void btnChooseFolder_Click(object sender, EventArgs e)
+        {
+            using var dialog = new FolderBrowserDialog();
+            dialog.Description = "Select a folder to save the video";
+            dialog.UseDescriptionForTitle = true;
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                txtFolderPath.Text = dialog.SelectedPath;
+            }
         }
     }
 }

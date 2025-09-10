@@ -1,4 +1,6 @@
-﻿namespace YoutubeVideoDownloader
+﻿using YoutubeVideoDownloader.Common;
+
+namespace YoutubeVideoDownloader
 {
     partial class YoutubeDownloaderForm
     {
@@ -72,6 +74,7 @@
             txtFolderPath.Name = "txtFolderPath";
             txtFolderPath.Size = new Size(378, 31);
             txtFolderPath.TabIndex = 3;
+            txtFolderPath.Text = "C:\\Videos";
             // 
             // lblFolderPath
             // 
@@ -91,6 +94,7 @@
             btnChooseFolder.Size = new Size(57, 34);
             btnChooseFolder.TabIndex = 5;
             btnChooseFolder.UseVisualStyleBackColor = true;
+            btnChooseFolder.Click += btnChooseFolder_Click;
             // 
             // YoutubeDownloaderForm
             // 
