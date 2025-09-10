@@ -1,4 +1,6 @@
-﻿namespace YoutubeVideoDownloader
+﻿using YoutubeVideoDownloader.Common;
+
+namespace YoutubeVideoDownloader
 {
     partial class YoutubeDownloaderForm
     {
@@ -28,22 +30,26 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(YoutubeDownloaderForm));
             txtYoutubeUrl = new TextBox();
             btnDownload = new Button();
             lblYoutubeUrl = new Label();
+            txtFolderPath = new TextBox();
+            lblFolderPath = new Label();
+            btnChooseFolder = new Button();
             SuspendLayout();
             // 
             // txtYoutubeUrl
             // 
-            txtYoutubeUrl.Location = new Point(17, 53);
+            txtYoutubeUrl.Location = new Point(13, 127);
             txtYoutubeUrl.Margin = new Padding(4, 5, 4, 5);
             txtYoutubeUrl.Name = "txtYoutubeUrl";
-            txtYoutubeUrl.Size = new Size(940, 31);
+            txtYoutubeUrl.Size = new Size(431, 31);
             txtYoutubeUrl.TabIndex = 0;
             // 
             // btnDownload
             // 
-            btnDownload.Location = new Point(398, 117);
+            btnDownload.Location = new Point(151, 168);
             btnDownload.Margin = new Padding(4, 5, 4, 5);
             btnDownload.Name = "btnDownload";
             btnDownload.Size = new Size(159, 42);
@@ -55,18 +61,49 @@
             // lblYoutubeUrl
             // 
             lblYoutubeUrl.AutoSize = true;
-            lblYoutubeUrl.Location = new Point(17, 23);
+            lblYoutubeUrl.Location = new Point(13, 97);
             lblYoutubeUrl.Margin = new Padding(4, 0, 4, 0);
             lblYoutubeUrl.Name = "lblYoutubeUrl";
             lblYoutubeUrl.Size = new Size(162, 25);
             lblYoutubeUrl.TabIndex = 2;
             lblYoutubeUrl.Text = "Youtube video URL";
             // 
+            // txtFolderPath
+            // 
+            txtFolderPath.Location = new Point(17, 58);
+            txtFolderPath.Name = "txtFolderPath";
+            txtFolderPath.Size = new Size(378, 31);
+            txtFolderPath.TabIndex = 3;
+            txtFolderPath.Text = "C:\\Videos";
+            // 
+            // lblFolderPath
+            // 
+            lblFolderPath.AutoSize = true;
+            lblFolderPath.Location = new Point(13, 30);
+            lblFolderPath.Name = "lblFolderPath";
+            lblFolderPath.Size = new Size(124, 25);
+            lblFolderPath.TabIndex = 4;
+            lblFolderPath.Text = "Folder to save";
+            // 
+            // btnChooseFolder
+            // 
+            btnChooseFolder.BackgroundImage = (Image)resources.GetObject("btnChooseFolder.BackgroundImage");
+            btnChooseFolder.BackgroundImageLayout = ImageLayout.Zoom;
+            btnChooseFolder.Location = new Point(401, 58);
+            btnChooseFolder.Name = "btnChooseFolder";
+            btnChooseFolder.Size = new Size(57, 34);
+            btnChooseFolder.TabIndex = 5;
+            btnChooseFolder.UseVisualStyleBackColor = true;
+            btnChooseFolder.Click += btnChooseFolder_Click;
+            // 
             // YoutubeDownloaderForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1143, 750);
+            ClientSize = new Size(486, 242);
+            Controls.Add(btnChooseFolder);
+            Controls.Add(lblFolderPath);
+            Controls.Add(txtFolderPath);
             Controls.Add(lblYoutubeUrl);
             Controls.Add(btnDownload);
             Controls.Add(txtYoutubeUrl);
@@ -82,5 +119,8 @@
         private TextBox txtYoutubeUrl;
         private Button btnDownload;
         private Label lblYoutubeUrl;
+        private TextBox txtFolderPath;
+        private Label lblFolderPath;
+        private Button btnChooseFolder;
     }
 }

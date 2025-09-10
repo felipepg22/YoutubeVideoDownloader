@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using YoutubeExplode;
+using YoutubeVideoDownloader.Services;
 
 namespace YoutubeVideoDownloader
 {
@@ -13,7 +14,7 @@ namespace YoutubeVideoDownloader
         private async void btnDownload_Click(object sender, EventArgs e)
         {
             btnDownload.Enabled = false;
-            string filePathToSaveVideo = "C:\\Videos";
+            string filePathToSaveVideo = txtFolderPath.Text.Trim();
 
             string urlFromVideo = txtYoutubeUrl.Text;
 
@@ -24,51 +25,17 @@ namespace YoutubeVideoDownloader
                 return;
             }
 
-            var youtube = new YoutubeClient();
-
-            var video = await youtube.Videos.GetAsync(urlFromVideo);
-
-            var streamManifest = await youtube.Videos.Streams.GetManifestAsync(urlFromVideo);
-
-            string videoFileName = Path.Combine(filePathToSaveVideo, $"video.mp4");
-            string audioFileName = Path.Combine(filePathToSaveVideo, $"audio.mp4");
-
-            string safeTitle = Regex.Replace(video.Title, @"[\s\\/:*?""<>|]", "");
-            string outputFileName = Path.Combine(filePathToSaveVideo, $"{safeTitle}.mp4");
-
-            var videoStreamInfo = streamManifest.GetVideoOnlyStreams()
-                        .OrderByDescending(s => s.VideoQuality.MaxHeight)
-                        .FirstOrDefault();
-
-            var audioStreamInfo = streamManifest.GetAudioOnlyStreams()
-                        .Where(s => (s.AudioLanguage is not null && s.AudioLanguage.ToString().Contains("original")) || s.AudioLanguage is null)
-                        .OrderByDescending(s => s.Bitrate)
-                        .FirstOrDefault();
-
-            if (videoStreamInfo is null || audioStreamInfo is null)
-            {
-                MessageBox.Show("Error while downloading video, please try again...");
-                btnDownload.Enabled = true;
-                return;
-            }
-
+            
             try
             {
-                await youtube.Videos.Streams.DownloadAsync(videoStreamInfo, videoFileName);
+                var youtubeDownloadService = new YoutubeDownloadService(new YoutubeClient());
 
-                await youtube.Videos.Streams.DownloadAsync(audioStreamInfo, audioFileName);
-
-                var ffmpeg = new NReco.VideoConverter.FFMpegConverter();
-                ffmpeg.Invoke($"-i \"{videoFileName}\" -i \"{audioFileName}\" -c:v copy -c:a aac \"{outputFileName}\"");
-
-                File.Delete(videoFileName);
-                File.Delete(audioFileName);
-
+                await youtubeDownloadService.DownloadVideoAsync(urlFromVideo, filePathToSaveVideo);
                 MessageBox.Show("Download completed successfully!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error downloading video: {ex.Message}");
+                MessageBox.Show(ex.Message);
                 return;
             }
             finally
@@ -76,7 +43,19 @@ namespace YoutubeVideoDownloader
                 btnDownload.Enabled = true;
             }
 
-            
+
+        }
+
+        private void btnChooseFolder_Click(object sender, EventArgs e)
+        {
+            using var dialog = new FolderBrowserDialog();
+            dialog.Description = "Select a folder to save the video";
+            dialog.UseDescriptionForTitle = true;
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                txtFolderPath.Text = dialog.SelectedPath;
+            }
         }
     }
 }
