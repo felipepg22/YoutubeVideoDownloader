@@ -45,18 +45,24 @@ namespace YoutubeVideoDownloader.Services
                 throw new DownloadException();
             }
 
+            var videoProgress = new Progress<double>(p => progress.Report(p * 70));            
+            var audioProgress = new Progress<double>(p => progress.Report(70 + (p * 25)));
+
             await _youtubeClient.Videos.Streams.DownloadAsync(videoStreamInfo, 
                                                               videoFileName, 
-                                                              new Progress<double>(p => progress.Report(p * 0.5)));
+                                                              videoProgress);
 
             await _youtubeClient.Videos.Streams.DownloadAsync(audioStreamInfo, 
                                                               audioFileName,
-                                                              new Progress<double>(p => progress.Report(50 + (p * 0.4))));
+                                                              audioProgress);
 
+            await Task.Delay(1000);
             var ffmpeg = new NReco.VideoConverter.FFMpegConverter();
+            
             ffmpeg.Invoke($"-i \"{videoFileName}\" -i \"{audioFileName}\" -c:v copy -c:a aac \"{outputFileName}\"");
             progress.Report(100);
 
+            
             File.Delete(videoFileName);
             File.Delete(audioFileName);
         }

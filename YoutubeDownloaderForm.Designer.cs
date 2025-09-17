@@ -103,6 +103,7 @@ namespace YoutubeVideoDownloader
             progressBarDownload.Name = "progressBarDownload";
             progressBarDownload.Size = new Size(462, 34);
             progressBarDownload.TabIndex = 6;
+            progressBarDownload.Maximum = 100;
             // 
             // YoutubeDownloaderForm
             // 
