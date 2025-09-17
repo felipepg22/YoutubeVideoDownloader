@@ -19,7 +19,7 @@ namespace YoutubeVideoDownloader.Services
             _youtubeClient = youtubeClient;
         }
 
-        public async Task DownloadVideoAsync(string url, string filePathToSave)
+        public async Task DownloadVideoAsync(string url, string filePathToSave, IProgress<double> progress)
         {
             var video = await GetVideoInformationAsync(url);
 
@@ -45,12 +45,17 @@ namespace YoutubeVideoDownloader.Services
                 throw new DownloadException();
             }
 
-            await _youtubeClient.Videos.Streams.DownloadAsync(videoStreamInfo, videoFileName);
+            await _youtubeClient.Videos.Streams.DownloadAsync(videoStreamInfo, 
+                                                              videoFileName, 
+                                                              new Progress<double>(p => progress.Report(p * 0.5)));
 
-            await _youtubeClient.Videos.Streams.DownloadAsync(audioStreamInfo, audioFileName);
+            await _youtubeClient.Videos.Streams.DownloadAsync(audioStreamInfo, 
+                                                              audioFileName,
+                                                              new Progress<double>(p => progress.Report(50 + (p * 0.4))));
 
             var ffmpeg = new NReco.VideoConverter.FFMpegConverter();
             ffmpeg.Invoke($"-i \"{videoFileName}\" -i \"{audioFileName}\" -c:v copy -c:a aac \"{outputFileName}\"");
+            progress.Report(100);
 
             File.Delete(videoFileName);
             File.Delete(audioFileName);

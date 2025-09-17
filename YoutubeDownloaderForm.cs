@@ -14,6 +14,7 @@ namespace YoutubeVideoDownloader
         private async void btnDownload_Click(object sender, EventArgs e)
         {
             btnDownload.Enabled = false;
+            progressBarDownload.Value = 0;
             string filePathToSaveVideo = txtFolderPath.Text.Trim();
 
             string urlFromVideo = txtYoutubeUrl.Text;
@@ -28,9 +29,14 @@ namespace YoutubeVideoDownloader
             
             try
             {
+                var progress = new Progress<double>(value =>
+                {
+                    progressBarDownload.Value = (int)Math.Round(value);
+                });
+
                 var youtubeDownloadService = new YoutubeDownloadService(new YoutubeClient());
 
-                await youtubeDownloadService.DownloadVideoAsync(urlFromVideo, filePathToSaveVideo);
+                await youtubeDownloadService.DownloadVideoAsync(urlFromVideo, filePathToSaveVideo, progress);
                 MessageBox.Show("Download completed successfully!");
             }
             catch (Exception ex)
@@ -41,6 +47,7 @@ namespace YoutubeVideoDownloader
             finally
             {
                 btnDownload.Enabled = true;
+                progressBarDownload.Value = 0;
             }
 
 

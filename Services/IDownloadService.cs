@@ -11,6 +11,6 @@ namespace YoutubeVideoDownloader.Services
     {
         public Task<Video> GetVideoInformationAsync(string url);
 
-        public Task DownloadVideoAsync(string url, string filePathToSave);
+        public Task DownloadVideoAsync(string url, string filePathToSave, IProgress<double> progress);
     }
 }
