@@ -1,3 +1,5 @@
+name: Publish Windows Forms App
+
 on: 
   workflow_dispatch:
 
