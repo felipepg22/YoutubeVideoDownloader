@@ -20,7 +20,7 @@ jobs:
       run: dotnet restore
 
     - name: Build solution
-      run: dotnet build --configuration Release --runtime win-x64
+      run: dotnet build --configuration Release
 
     - name: Publish build output
       run: dotnet publish --configuration Release --runtime win-x64 --output ./publish
