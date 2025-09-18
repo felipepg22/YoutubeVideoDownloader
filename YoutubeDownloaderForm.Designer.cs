@@ -37,6 +37,7 @@ namespace YoutubeVideoDownloader
             txtFolderPath = new TextBox();
             lblFolderPath = new Label();
             btnChooseFolder = new Button();
+            progressBarDownload = new ProgressBar();
             SuspendLayout();
             // 
             // txtYoutubeUrl
@@ -49,7 +50,7 @@ namespace YoutubeVideoDownloader
             // 
             // btnDownload
             // 
-            btnDownload.Location = new Point(151, 168);
+            btnDownload.Location = new Point(157, 206);
             btnDownload.Margin = new Padding(4, 5, 4, 5);
             btnDownload.Name = "btnDownload";
             btnDownload.Size = new Size(159, 42);
@@ -96,11 +97,20 @@ namespace YoutubeVideoDownloader
             btnChooseFolder.UseVisualStyleBackColor = true;
             btnChooseFolder.Click += btnChooseFolder_Click;
             // 
+            // progressBarDownload
+            // 
+            progressBarDownload.Location = new Point(12, 164);
+            progressBarDownload.Name = "progressBarDownload";
+            progressBarDownload.Size = new Size(462, 34);
+            progressBarDownload.TabIndex = 6;
+            progressBarDownload.Maximum = 100;
+            // 
             // YoutubeDownloaderForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(486, 242);
+            ClientSize = new Size(486, 262);
+            Controls.Add(progressBarDownload);
             Controls.Add(btnChooseFolder);
             Controls.Add(lblFolderPath);
             Controls.Add(txtFolderPath);
@@ -122,5 +132,6 @@ namespace YoutubeVideoDownloader
         private TextBox txtFolderPath;
         private Label lblFolderPath;
         private Button btnChooseFolder;
+        private ProgressBar progressBarDownload;
     }
 }
