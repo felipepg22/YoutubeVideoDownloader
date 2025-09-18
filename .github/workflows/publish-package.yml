@@ -1,36 +1,30 @@
-trigger:
-- main
+on: 
+  workflow_dispatch:
 
-pool:
-  vmImage: 'windows-latest'
+jobs:
+  build:
+    runs-on: windows-latest
 
-steps:
-- task: UseDotNet@2
-  inputs:
-    packageType: 'sdk'
-    version: '9.x'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-- task: NuGetToolInstaller@1
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.x'
 
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '**/*.sln'
+    - name: Restore NuGet packages
+      run: dotnet restore
 
-- task: VSBuild@1
-  inputs:
-    solution: '**/*.sln'
-    msbuildArgs: '/p:Configuration=Release'
-    platform: 'x64'
-    configuration: 'Release'
+    - name: Build solution
+      run: dotnet build --configuration Release --runtime win-x64
 
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(Build.SourcesDirectory)\bin\Release'
-    Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    - name: Publish build output
+      run: dotnet publish --configuration Release --runtime win-x64 --output ./publish
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: windows-forms-app
+        path: ./publish
